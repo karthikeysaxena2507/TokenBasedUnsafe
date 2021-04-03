@@ -227,7 +227,7 @@ const changePassword = async(req, res, next) => {
                     });
                 }
             });
-            res.json(req.cookies);
+            res.json("Password Changed Successfully");
         }
     }
     catch(err) {
