@@ -41,7 +41,7 @@ const Change = () => {
                     window.location = "/";
                 }
                 renewAccessToken();
-                const interval = setInterval(() => renewAccessToken(), 10*1000); // 10 secs
+                const interval = setInterval(() => renewAccessToken(), 30*1000); // 10 secs
                 const timer = setTimeout(() => deleteRefreshToken(), 60*60*1000); // 1 hr
                 return () => {
                     clearInterval(interval);
