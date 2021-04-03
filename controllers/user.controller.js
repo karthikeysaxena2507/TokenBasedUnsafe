@@ -204,31 +204,35 @@ const renewAccessToken = async(req, res, next) => {
 const changePassword = async(req, res, next) => {
     try {
         const user = req.user;
-        if(user === null || user.username !== req.body.username || user === undefined) {
-            res.status(401).json({Error: "You Are Not Logged In"});
-        }
-        else {
-            let { newPassword } = req.body;
-            newPassword = helper.sanitize(newPassword);
-            let existingUser = await User.findOne({where: {username: user.username}});
-            bcrypt.genSalt(10, (err, salt) => {
-                if(!err) 
-                {
-                    bcrypt.hash(newPassword, salt, async(err, hash) => {
-                        if(err) res.json(next(err));
-                        else 
-                        {
-                            existingUser.password = hash;
-                            existingUser.save()
-                            .then((response) => {
-                                res.json(response);
-                            })
-                        }
-                    });
-                }
-            });
-            res.json("Password Changed Successfully");
-        }
+        res.json(req.cookies, req.user);
+        // if(user === null || user.username !== req.body.username || user === undefined) {
+        //     res.status(401).json({Error: "You Are Not Logged In"});
+        // }
+        // else {
+            // let { newPassword } = req.body;
+            // newPassword = helper.sanitize(newPassword);
+            // let existingUser = await User.findOne({where: {username: user.username}});
+            // bcrypt.genSalt(10, (err, salt) => {
+            //     if(!err) 
+            //     {
+            //         bcrypt.hash(newPassword, salt, async(err, hash) => {
+            //             if(err) res.json(next(err));
+            //             else 
+            //             {
+            //                 existingUser.password = hash;
+            //                 existingUser.save()
+            //                 .then((response) => {
+            //                     res.json(response);
+            //                 })
+            //             }
+            //         });
+            //     }
+            // });
+            // res.json({
+            //     message: "Password Changed Successfully",
+            //     token: 
+            // });
+        // }
     }
     catch(err) {
         res.json(next(err));
