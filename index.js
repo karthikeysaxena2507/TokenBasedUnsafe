@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors({
-    credentials: true
+    credentials: true,
+    origin: true
 }));
 app.use(express.json());
 app.use(session({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized:true}));
