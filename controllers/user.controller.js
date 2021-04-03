@@ -165,7 +165,7 @@ const renewAccessToken = async(req, res, next) => {
             res.status(401).json({Error: "You Are Not Logged In"});
         }
         else {
-            const accessToken = req.cookies.token;
+            const accessToken = req.cookies.jwtToken;
             console.log("OLD ACCESS TOKEN => ", accessToken);
             const refreshToken = await redis.getRefreshTokenFromAccessToken(accessToken);
             console.log("REFRESH TOKEN => ", refreshToken);
