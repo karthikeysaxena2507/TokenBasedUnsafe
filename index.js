@@ -7,10 +7,7 @@ const session = require('express-session');
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(cors({
-    credentials: true,
-    origin: false
-}));
+app.use(cors());
 app.use(express.json());
 app.use(session({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized:true}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
