@@ -9,9 +9,7 @@ const app = express();
 
 // app.use(cors());
 app.use(cors({
-    origin: function(origin, callback){
-      return callback(null, true);
-    },
+    origin: "http://localhost:3001",
     optionsSuccessStatus: 200,
     credentials: true
   }));
