@@ -17,7 +17,6 @@ const Home = () => {
             try {
                 const renewAccessToken = async() => {
                     const response = await axios.get("/users/auth");
-                    console.log(response.data);
                     setAccessToken(response.data.accessToken);
                     setRefreshToken(response.data.refreshToken);
                     if(response.data === "INVALID") {

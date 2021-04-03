@@ -205,7 +205,7 @@ const changePassword = async(req, res, next) => {
     try {
         const user = req.user;
         if(user === null || user.username !== req.body.username || user === undefined) {
-            res.json({message: "Error", token: req.cookies.jwtToken});
+            res.json({message: "Error", token: req.cookies.jwtToken, user: req.user});
         }
         else {
             let { newPassword } = req.body;
