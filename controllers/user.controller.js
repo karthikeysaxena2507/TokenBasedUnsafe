@@ -93,7 +93,7 @@ const loginUser = async(req, res, next) => {
                                     console.log("REFRESH TOKEN => ", refreshToken);
                                     redis.setAccessToken(accessToken, refreshToken);
                                     redis.setRefreshToken(refreshToken);
-                                    res.cookie("token", accessToken, {
+                                    res.cookie("jwtToken", accessToken, {
                                         httpOnly: true,
                                         sameSite: 'None',
                                         secure: true
@@ -119,7 +119,7 @@ const loginUser = async(req, res, next) => {
 const checkAuth = async(req, res, next) => {
     try {
         if(req.user === null) {
-            res.clearCookie("token");
+            res.clearCookie("jwtToken");
             res.json("INVALID");
         }
         else {
@@ -182,9 +182,9 @@ const renewAccessToken = async(req, res, next) => {
                         {
                             console.log("NEW ACCESS TOKEN => ", newAccessToken);
                             redis.deleteToken(accessToken);
-                            res.clearCookie("token");
+                            res.clearCookie("jwtToken");
                             redis.setAccessToken(newAccessToken, refreshToken);
-                            res.cookie("token", newAccessToken, {
+                            res.cookie("jwtToken", newAccessToken, {
                                 httpOnly: true,
                                 sameSite: 'None',
                                 secure: true

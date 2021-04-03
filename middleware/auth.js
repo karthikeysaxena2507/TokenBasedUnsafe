@@ -12,7 +12,7 @@ let accessTokenVerifyOptions = {
 };
 
 module.exports = (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies.jwtToken;
     if(!token)
     {
         req.user = null;
