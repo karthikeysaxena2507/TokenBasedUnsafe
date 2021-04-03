@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: true
+    origin: false
 }));
 app.use(express.json());
 app.use(session({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized:true}));
