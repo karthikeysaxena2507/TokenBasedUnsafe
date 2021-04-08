@@ -43,8 +43,8 @@ const Xss = () => {
                     window.location = "/";
                 }
                 renewAccessToken();
-                const interval = setInterval(() => renewAccessToken(), 30*1000); // 30 secs
-                const timer = setTimeout(() => deleteRefreshToken(), 180*1000); // 3 mins
+                const interval = setInterval(() => renewAccessToken(), 15*1000); // 30 secs
+                const timer = setTimeout(() => deleteRefreshToken(), 75*1000); // 3 mins
                 return () => {
                     clearInterval(interval);
                     clearTimeout(timer);
