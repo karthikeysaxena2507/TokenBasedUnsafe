@@ -44,7 +44,7 @@ const Xss = () => {
                 }
                 renewAccessToken();
                 const interval = setInterval(() => renewAccessToken(), 30*1000); // 10 secs
-                const timer = setTimeout(() => deleteRefreshToken(), 60*60*1000); // 1 hr
+                const timer = setTimeout(() => deleteRefreshToken(), 180*1000); // 1 hr
                 return () => {
                     clearInterval(interval);
                     clearTimeout(timer);
