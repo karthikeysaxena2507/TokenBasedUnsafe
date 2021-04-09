@@ -2,7 +2,6 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const redis = require("../redis/index");
-const helper = require("../helper/index");
 
 let privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
 let publicKey = process.env.PUBLIC_KEY.replace(/\\n/g, '\n');
@@ -34,10 +33,6 @@ let refreshTokenVerifyOptions = {
 const registerUser = async(req, res, next) => {
     try {
         let {username, email, password} = req.body;
-        username = helper.sanitize(username);
-        email = helper.sanitize(email);
-        password = helper.sanitize(password);
-        console.log(username, email, password);
         const foundUser = await User.findOne({where: {username}});
         if(foundUser) res.json("Username Already Exists");
         else {
@@ -69,8 +64,6 @@ const registerUser = async(req, res, next) => {
 const loginUser = async(req, res, next) => {
     try {
         let { email, password } = req.body;
-        email = helper.sanitize(email);
-        password = helper.sanitize(password);
         const user = await User.findOne({where: {email}});
         if(user)
         {
@@ -209,7 +202,6 @@ const changePassword = async(req, res, next) => {
         }
         else {
             let { newPassword } = req.body;
-            newPassword = helper.sanitize(newPassword);
             let existingUser = await User.findOne({where: {username: user.username}});
             bcrypt.genSalt(10, (err, salt) => {
                 if(!err) 
@@ -241,7 +233,6 @@ const saveText = async(req, res, next) => {
             res.status(401).json({Error: "You Are Not Logged In"});
         }
         else {
-            let text = helper.sanitize(req.body.text);
             res.json(text);
         }
     }

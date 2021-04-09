@@ -1,20 +1,28 @@
+/* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Logout from "../Components/Logout";
 import Data from "../Components/Data";
 import Heading from "../Components/Heading";
 import Button from "../Components/Button";
+import InnerHTML from 'dangerously-set-html-content'
 
 const Xss = () => {
+
+    const example1 = "<script> alert('Hacked') </script>";
+    const example2 = "<scri<script>pt> alert('Hacked') </script>";
+    const example3 = `<img src onerror="alert('Hacked')">`;
 
     const [username, setUsername] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [refreshToken, setRefreshToken] = useState("");
     const [message, setMessage] = useState("");
-    const [text, setText] = useState("");
-    const [textMessage, setTextMessage] = useState("");
-    const [htmlText, setHtmlText] = useState("");
-    const [savedText, setSavedText] = useState("");
+    const [lowText, setLowText] = useState("");
+    const [medText, setMedText] = useState("");
+    const [highText, setHighText] = useState("");
+    const [lowHtmlText, setLowHtmlText] = useState("");
+    const [medHtmlText, setMedHtmlText] = useState("");
+    const [highHtmlText, setHighHtmlText] = useState("");
 
     useEffect(() => {
         const check = async() => {
@@ -57,17 +65,17 @@ const Xss = () => {
         check(); 
     },[]);
 
-    const sendText = async() => {
-        try {
-            setTextMessage("Sending ...");
-            const response = await axios.post("/users/text", {username, text});
-            setTextMessage("");
-            setHtmlText(text);
-            setSavedText(response.data);
-        }
-        catch(err) {
-            console.log(err);
-        }
+    const sendLow = () => {
+        setLowHtmlText(lowText);
+    }
+
+    const sendMed = () => {
+        setMedHtmlText(medText.replace("<script>", ""));
+    }
+    
+    const sendHigh = () => {
+        setHighHtmlText(highText.replace(/<.*?script.*?>.*?<\/.*?script.*?>/igm, ''));
+        console.log(highHtmlText);
     }
     
     return (
@@ -76,21 +84,57 @@ const Xss = () => {
         <Button route = "/home" content = "Home" />
         <Button route = "/change" content = "Change Password" />
         <Logout username = {username} />
-        <div>
-            <input 
-                type="text" 
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Random Text" 
-                autoComplete="off" 
-                className="mt-3 pt-2 pb-2 pr-2 pl-2"
-                required 
-            />
+        <div className="mt-3">
+            <h2> LEVEL - 1 </h2>
+            <div>
+                <input 
+                    type="text" 
+                    value={lowText}
+                    onChange={(e) => setLowText(e.target.value)}
+                    placeholder="Random Text" 
+                    autoComplete="off" 
+                    className="mt-3 pt-2 pb-2 pr-2 pl-2"
+                    required 
+                />
+            </div>
+            {example1}
+            <div className="mt-2"> <InnerHTML html = {lowHtmlText} /> </div>
+            <button className="btn btn-dark mt-3" onClick={() => sendLow()}> Submit Text </button> 
         </div>
-        <button className="btn btn-dark mt-3" onClick={() => sendText()}> Submit Text </button> 
-        <div dangerouslySetInnerHTML={{ __html: "Html set on page: " + htmlText}} className="mt-3"></div>
-        <h5 className="mt-3"> {textMessage} </h5>
-        <div className="mt-3"> Text Saved To Database: {savedText} </div>
+        <div className="mt-3">
+            <h2> LEVEL - 2 </h2>
+            <div>
+                <input 
+                    type="text" 
+                    value={medText}
+                    onChange={(e) => setMedText(e.target.value)}
+                    placeholder="Random Text" 
+                    autoComplete="off" 
+                    className="mt-3 pt-2 pb-2 pr-2 pl-2"
+                    required 
+                />
+            </div>
+            {example2}
+            <div className="mt-2"> <InnerHTML html = {medHtmlText} /> </div>
+            <button className="btn btn-dark mt-3" onClick={() => sendMed()}> Submit Text </button> 
+        </div>
+        <div className="mt-3">
+            <div>
+                <h2> LEVEL - 3 </h2>
+                <input 
+                    type="text" 
+                    value={highText}
+                    onChange={(e) => setHighText(e.target.value)}
+                    placeholder="Random Text" 
+                    autoComplete="off" 
+                    className="mt-3 pt-2 pb-2 pr-2 pl-2"
+                    required 
+                />
+            </div>
+            {example3}
+            <div className="mt-2"> <InnerHTML html = {highHtmlText} /> </div>
+            <button className="btn btn-dark mt-3" onClick={() => sendHigh()}> Submit Text </button> 
+        </div>
         <h5 className="mt-3"> {message} </h5>
         <Data accessToken = {accessToken} refreshToken = {refreshToken} />
     </div>
