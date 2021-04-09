@@ -97,7 +97,7 @@ const Xss = () => {
                     required 
                 />
             </div>
-            {example1}
+            Example: {example1}
             <div className="mt-2"> <InnerHTML html = {lowHtmlText} /> </div>
             <button className="btn btn-dark mt-3" onClick={() => sendLow()}> Submit Text </button> 
         </div>
@@ -114,7 +114,7 @@ const Xss = () => {
                     required 
                 />
             </div>
-            {example2}
+            Example: {example2}
             <div className="mt-2"> <InnerHTML html = {medHtmlText} /> </div>
             <button className="btn btn-dark mt-3" onClick={() => sendMed()}> Submit Text </button> 
         </div>
@@ -131,7 +131,7 @@ const Xss = () => {
                     required 
                 />
             </div>
-            {example3}
+            Example: {example3}
             <div className="mt-2"> <InnerHTML html = {highHtmlText} /> </div>
             <button className="btn btn-dark mt-3" onClick={() => sendHigh()}> Submit Text </button> 
         </div>
