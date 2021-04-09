@@ -9,9 +9,9 @@ import InnerHTML from 'dangerously-set-html-content'
 
 const Xss = () => {
 
-    const example1 = "<script> alert('Hacked') </script>";
-    const example2 = "<scri<script>pt> alert('Hacked') </script>";
-    const example3 = `<img src onerror="alert('Hacked')">`;
+    const example1 = "<script> alert(document.cookie) </script>";
+    const example2 = "<scri<script>pt> alert(document.cookie) </script>";
+    const example3 = `<img src onerror="alert(document.cookie)">`;
 
     const [username, setUsername] = useState("");
     const [accessToken, setAccessToken] = useState("");
