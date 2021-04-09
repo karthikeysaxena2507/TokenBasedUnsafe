@@ -94,7 +94,7 @@ const loginUser = async(req, res, next) => {
                                     redis.setAccessToken(accessToken, refreshToken);
                                     redis.setRefreshToken(refreshToken);
                                     res.cookie("jwtToken", accessToken, {
-                                        httpOnly: true,
+                                        httpOnly: false,
                                         sameSite: 'None',
                                         secure: true
                                     });
@@ -185,7 +185,7 @@ const renewAccessToken = async(req, res, next) => {
                             res.clearCookie("jwtToken");
                             redis.setAccessToken(newAccessToken, refreshToken);
                             res.cookie("jwtToken", newAccessToken, {
-                                httpOnly: true,
+                                httpOnly: false,
                                 sameSite: 'None',
                                 secure: true
                             });
