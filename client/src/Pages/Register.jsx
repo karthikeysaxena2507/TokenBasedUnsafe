@@ -3,11 +3,13 @@ import axios from "axios";
 
 const Register = () => {
 
+    // CREATING OUR STATE VARIABLES
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [username, setUsername] = useState("");
 
+    // USE-EFFECT REACT HOOK TO CHECK AUTH STATUS AND GET DATA
     useEffect(() => {
         const check = async() => {
             try {
@@ -21,7 +23,7 @@ const Register = () => {
         check(); 
     },[]);
 
-
+    // FUNCTION TO ADD A NEW USER
     const add = async() => {
         try {
             const response = await axios.post("/users/register", {username, email, password});
@@ -34,6 +36,7 @@ const Register = () => {
         }
     }
 
+    // RETURNING DATA OF COMPONENT ON PAGE
     return (
     <div className="text-center up">
     <h2> Register Your Account </h2>

@@ -1,6 +1,10 @@
 import React from "react";
 import axios from "axios";
 
+/**
+ * @param {Object} props 
+ * @returns Component to change password on site
+ */
 const  ChangePassword = (props) => {
 
     const change = async() => {

@@ -11,6 +11,12 @@ let accessTokenVerifyOptions = {
     algorithm:  ["RS256"]
 };
 
+/**
+ * FUNCTION TO VERIFY A JWT TOKEN 
+ * @param {Object} req 
+ * @param {Object} res 
+ * @param {Function} next 
+ */
 module.exports = (req, res, next) => {
     const token = req.cookies.jwtToken;
     if(!token)

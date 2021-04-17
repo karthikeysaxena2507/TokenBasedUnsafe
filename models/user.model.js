@@ -1,6 +1,9 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../database/connection");
 
+/**
+ * CREATING A USER MODEL FOR USER TABLE IN DATABASE
+ */
 const User = sequelize.define("users", {
   id: {
     autoIncrement: true,

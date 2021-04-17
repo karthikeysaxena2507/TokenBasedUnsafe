@@ -13,6 +13,7 @@ const Xss = () => {
     const example2 = "<scri<script>pt> alert(document.cookie) </script>";
     const example3 = `<img src onerror="alert(document.cookie)">`;
 
+    // CREATING OUR STATE VARIABLES
     const [username, setUsername] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [refreshToken, setRefreshToken] = useState("");
@@ -24,6 +25,7 @@ const Xss = () => {
     const [medHtmlText, setMedHtmlText] = useState("");
     const [highHtmlText, setHighHtmlText] = useState("");
 
+    // USE-EFFECT REACT HOOK TO CHECK AUTH STATUS AND GET DATA
     useEffect(() => {
         const check = async() => {
             try {
@@ -75,9 +77,9 @@ const Xss = () => {
     
     const sendHigh = () => {
         setHighHtmlText(highText.replace(/<.*?script.*?>.*?<\/.*?script.*?>/igm, ''));
-        console.log(highHtmlText);
     }
     
+    // RETURNING DATA OF COMPONENT ON PAGE
     return (
     <div className="text-center up ml-5 mr-5">
         <Heading content = "XSS Attack" />

@@ -8,12 +8,14 @@ import ChangePassword from "../Components/ChangePassword";
 
 const Change = () => {
 
+    // CREATING OUR STATE VARIABLES
     const [username, setUsername] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [refreshToken, setRefreshToken] = useState("");
     const [message, setMessage] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
+    // USE-EFFECT REACT HOOK TO CHECK AUTH STATUS AND GET DATA
     useEffect(() => {
         const check = async() => {
             try {
@@ -55,6 +57,7 @@ const Change = () => {
         check(); 
     },[]);
     
+    // RETURNING DATA OF COMPONENT ON PAGE
     return (
     <div className="text-center up ml-5 mr-5">
         <Heading content = "Change Your Password"/>

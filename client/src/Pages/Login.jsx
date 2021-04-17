@@ -3,10 +3,12 @@ import axios from "axios";
 
 const Login = () => {
 
+    // CREATING OUR STATE VARIABLES
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    // USE-EFFECT REACT HOOK TO CHECK AUTH STATUS AND GET DATA
     useEffect(() => {
         const check = async() => {
             try {
@@ -20,6 +22,7 @@ const Login = () => {
         check(); 
     },[]);
 
+    // FUNCTION TO ADD A NEW USER
     const add = async() => {
         try {
             const response = await axios.post("/users/login", {email, password})
@@ -32,6 +35,7 @@ const Login = () => {
         }
     }
 
+    // RETURNING DATA OF COMPONENT ON PAGE
     return (
     <div className="text-center up">
     <h2> Login to Your Account </h2>

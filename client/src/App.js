@@ -7,6 +7,7 @@ import Change from "./Pages/Change";
 import Register from "./Pages/Register";
 import Error from "./Pages/Error";
 
+// COMPONENT TO DEFINE ALL ROUTES AND GATHER ALL COMPONENTS
 const App = () => {
   return (
     <Router>
